@@ -50,7 +50,7 @@ export default function AlertsPanel() {
               return (
                 <div
                   key={alert.id}
-                  className={`border rounded-lg p-4 ${getAlertStyles(alert.type)}`}
+                  className={`border rounded-lg p-4 ?{getAlertStyles(alert.type)}`}
                 >
                   <div className="flex items-start space-x-3">
                     <Icon className="w-5 h-5 mt-0.5 flex-shrink-0" />

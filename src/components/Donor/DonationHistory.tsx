@@ -33,7 +33,7 @@ export default function DonationHistory({ donations }: DonationHistoryProps) {
                     <h4 className="text-lg font-bold text-gray-900 mb-1">{campaign?.title}</h4>
                     <p className="text-sm text-gray-600 mb-2">{campaign?.location}</p>
                     <div className="flex items-center space-x-4 text-sm">
-                      <span className="font-semibold text-green-600">${donation.amount.toLocaleString()}</span>
+                      <span className="font-semibold text-green-600">?{donation.amount.toLocaleString()}</span>
                       <span className="text-gray-500">{new Date(donation.date).toLocaleDateString()}</span>
                     </div>
                   </div>

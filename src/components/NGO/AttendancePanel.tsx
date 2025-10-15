@@ -22,7 +22,7 @@ export default function AttendancePanel() {
 
   const generateOTP = () => {
     const otp = Math.floor(100000 + Math.random() * 900000);
-    alert(`OTP Generated: ${otp}\nShare this with participants for attendance.`);
+    alert(`OTP Generated: ?{otp}\nShare this with participants for attendance.`);
   };
 
   return (
@@ -46,7 +46,7 @@ export default function AttendancePanel() {
               .map(training => (
                 <div
                   key={training.id}
-                  className={`border rounded-lg p-4 cursor-pointer transition-all ${
+                  className={`border rounded-lg p-4 cursor-pointer transition-all ?{
                     selectedTraining === training.id
                       ? 'border-blue-500 bg-blue-50'
                       : 'border-gray-200 hover:border-blue-300'
@@ -58,7 +58,7 @@ export default function AttendancePanel() {
                       <h4 className="font-semibold text-gray-900">{training.title}</h4>
                       <p className="text-sm text-gray-600">{training.location.name}</p>
                     </div>
-                    <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                    <span className={`px-2 py-1 rounded text-xs font-semibold ?{
                       training.status === 'ongoing'
                         ? 'bg-green-100 text-green-700'
                         : 'bg-blue-100 text-blue-700'
@@ -80,7 +80,7 @@ export default function AttendancePanel() {
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div
                         className="bg-blue-600 h-2 rounded-full"
-                        style={{ width: `${(training.enrolled / training.capacity) * 100}%` }}
+                        style={{ width: `?{(training.enrolled / training.capacity) * 100}%` }}
                       />
                     </div>
                   </div>
@@ -196,7 +196,7 @@ export default function AttendancePanel() {
                 <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                   <div
                     className="bg-green-600 h-2 rounded-full"
-                    style={{ width: `${(training.enrolled / training.capacity) * 100}%` }}
+                    style={{ width: `?{(training.enrolled / training.capacity) * 100}%` }}
                   />
                 </div>
               </div>

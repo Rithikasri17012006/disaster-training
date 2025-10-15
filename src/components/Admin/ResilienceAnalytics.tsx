@@ -25,7 +25,7 @@ export default function ResilienceAnalytics() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `resilience-report-${Date.now()}.json`;
+    a.download = `resilience-report-?{Date.now()}.json`;
     a.click();
   };
 
@@ -94,12 +94,12 @@ export default function ResilienceAnalytics() {
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-3">
                   <div
-                    className={`h-3 rounded-full ${
+                    className={`h-3 rounded-full ?{
                       region.score >= 7 ? 'bg-green-600' :
                       region.score >= 6 ? 'bg-blue-600' :
                       'bg-orange-600'
                     }`}
-                    style={{ width: `${region.score * 10}%` }}
+                    style={{ width: `?{region.score * 10}%` }}
                   />
                 </div>
               </div>
@@ -120,12 +120,12 @@ export default function ResilienceAnalytics() {
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-3">
                     <div
-                      className={`h-3 rounded-full ${
+                      className={`h-3 rounded-full ?{
                         region.vulnerabilityIndex >= 8 ? 'bg-red-600' :
                         region.vulnerabilityIndex >= 7 ? 'bg-orange-600' :
                         'bg-yellow-600'
                       }`}
-                      style={{ width: `${region.vulnerabilityIndex * 10}%` }}
+                      style={{ width: `?{region.vulnerabilityIndex * 10}%` }}
                     />
                   </div>
                 </div>
@@ -155,7 +155,7 @@ export default function ResilienceAnalytics() {
                   <td className="py-3 px-4 text-right text-gray-700">{region.population.toLocaleString()}</td>
                   <td className="py-3 px-4 text-right text-gray-700">{region.trainedPopulation.toLocaleString()}</td>
                   <td className="py-3 px-4 text-right">
-                    <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                    <span className={`px-2 py-1 rounded text-xs font-semibold ?{
                       region.trainingCoverage >= 50 ? 'bg-green-100 text-green-700' :
                       region.trainingCoverage >= 40 ? 'bg-yellow-100 text-yellow-700' :
                       'bg-red-100 text-red-700'

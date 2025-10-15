@@ -28,13 +28,13 @@ export default function GISMap() {
               key={disaster.id}
               className="absolute"
               style={{
-                left: `${20 + index * 20}%`,
-                top: `${25 + index * 15}%`,
+                left: `?{20 + index * 20}%`,
+                top: `?{25 + index * 15}%`,
               }}
             >
               <div className="relative group cursor-pointer">
                 <div
-                  className={`w-12 h-12 rounded-full flex items-center justify-center animate-pulse ${
+                  className={`w-12 h-12 rounded-full flex items-center justify-center animate-pulse ?{
                     disaster.severity === 'critical'
                       ? 'bg-red-500'
                       : disaster.severity === 'high'
@@ -61,8 +61,8 @@ export default function GISMap() {
               key={training.id}
               className="absolute"
               style={{
-                left: `${25 + index * 20}%`,
-                top: `${50 + index * 10}%`,
+                left: `?{25 + index * 20}%`,
+                top: `?{50 + index * 10}%`,
               }}
             >
               <div className="relative group cursor-pointer">
@@ -99,7 +99,7 @@ export default function GISMap() {
                     <p className="text-sm text-gray-600">{disaster.location.name}</p>
                   </div>
                   <span
-                    className={`px-2 py-1 rounded text-xs font-semibold ${
+                    className={`px-2 py-1 rounded text-xs font-semibold ?{
                       disaster.severity === 'critical'
                         ? 'bg-red-100 text-red-700'
                         : disaster.severity === 'high'
@@ -139,7 +139,7 @@ export default function GISMap() {
                     <p className="text-sm text-gray-600">{training.location.name}</p>
                   </div>
                   <span
-                    className={`px-2 py-1 rounded text-xs font-semibold ${
+                    className={`px-2 py-1 rounded text-xs font-semibold ?{
                       training.status === 'ongoing'
                         ? 'bg-green-100 text-green-700'
                         : training.status === 'upcoming'
@@ -160,7 +160,7 @@ export default function GISMap() {
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div
                       className="bg-blue-600 h-2 rounded-full"
-                      style={{ width: `${(training.enrolled / training.capacity) * 100}%` }}
+                      style={{ width: `?{(training.enrolled / training.capacity) * 100}%` }}
                     />
                   </div>
                 </div>

@@ -56,7 +56,7 @@ export default function TrainingsList() {
                     <h4 className="text-lg font-bold text-gray-900 mb-1">{training.title}</h4>
                     <p className="text-sm text-gray-600 mb-2">{training.description}</p>
                   </div>
-                  <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                  <span className={`px-2 py-1 rounded text-xs font-semibold ?{
                     training.phase === 'before' ? 'bg-blue-100 text-blue-700' :
                     training.phase === 'during' ? 'bg-red-100 text-red-700' :
                     'bg-green-100 text-green-700'
@@ -83,16 +83,16 @@ export default function TrainingsList() {
                 <div className="mb-4">
                   <div className="flex items-center justify-between text-sm mb-2">
                     <span className="text-gray-600">Enrollment</span>
-                    <span className={`font-semibold ${isFull ? 'text-red-600' : 'text-gray-900'}`}>
+                    <span className={`font-semibold ?{isFull ? 'text-red-600' : 'text-gray-900'}`}>
                       {training.enrolled}/{training.capacity} enrolled
                     </span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div
-                      className={`h-2 rounded-full ${
+                      className={`h-2 rounded-full ?{
                         isFull ? 'bg-red-600' : 'bg-blue-600'
                       }`}
-                      style={{ width: `${(training.enrolled / training.capacity) * 100}%` }}
+                      style={{ width: `?{(training.enrolled / training.capacity) * 100}%` }}
                     />
                   </div>
                   {!isFull && (
@@ -121,7 +121,7 @@ export default function TrainingsList() {
                   <button
                     onClick={() => handleRegister(training.id)}
                     disabled={isFull}
-                    className={`w-full px-4 py-2 rounded-lg font-medium transition-colors ${
+                    className={`w-full px-4 py-2 rounded-lg font-medium transition-colors ?{
                       isFull
                         ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                         : 'bg-blue-600 text-white hover:bg-blue-700'

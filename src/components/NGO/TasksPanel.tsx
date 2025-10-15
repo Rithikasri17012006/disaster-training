@@ -101,10 +101,10 @@ export default function TasksPanel({ tasks: initialTasks }: TasksPanelProps) {
                 </div>
                 <div className="grid grid-cols-2 gap-3 mb-4">
                   <div className="flex items-center space-x-2 text-sm">
-                    <span className={`px-2 py-1 rounded font-semibold ${getPhaseColor(task.phase)}`}>
+                    <span className={`px-2 py-1 rounded font-semibold ?{getPhaseColor(task.phase)}`}>
                       {task.phase.toUpperCase()}
                     </span>
-                    <span className={`px-2 py-1 rounded font-semibold ${getPriorityColor(task.priority)}`}>
+                    <span className={`px-2 py-1 rounded font-semibold ?{getPriorityColor(task.priority)}`}>
                       {task.priority.toUpperCase()}
                     </span>
                   </div>

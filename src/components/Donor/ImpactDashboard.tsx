@@ -27,7 +27,7 @@ export default function ImpactDashboard({ donations }: ImpactDashboardProps) {
             </div>
           </div>
           <p className="text-sm text-gray-600 mb-1">Total Contribution</p>
-          <p className="text-3xl font-bold text-gray-900">${totalDonated.toLocaleString()}</p>
+          <p className="text-3xl font-bold text-gray-900">?{totalDonated.toLocaleString()}</p>
           <p className="text-xs text-green-600 font-medium mt-2">100% allocated</p>
         </div>
 
@@ -74,7 +74,7 @@ export default function ImpactDashboard({ donations }: ImpactDashboardProps) {
                 <div className="flex-shrink-0 w-2 h-2 mt-2 bg-red-600 rounded-full" />
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-1">
-                    <p className="font-semibold text-gray-900">${donation.amount.toLocaleString()} Donated</p>
+                    <p className="font-semibold text-gray-900">?{donation.amount.toLocaleString()} Donated</p>
                     <span className="text-xs text-gray-500">{new Date(donation.date).toLocaleDateString()}</span>
                   </div>
                   {donation.impactProof && (

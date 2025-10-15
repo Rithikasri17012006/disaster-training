@@ -18,7 +18,7 @@ export default function CampaignsList() {
       return;
     }
 
-    alert(`Thank you for donating $${donationAmount}! Transaction processing...`);
+    alert(`Thank you for donating ??{donationAmount}! Transaction processing...`);
     setSelectedCampaign(null);
     setDonationAmount('');
   };
@@ -33,7 +33,7 @@ export default function CampaignsList() {
               <button
                 key={phase}
                 onClick={() => setFilter(phase as any)}
-                className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ?{
                   filter === phase
                     ? 'bg-red-600 text-white'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -56,14 +56,14 @@ export default function CampaignsList() {
                   <div>
                     <h4 className="text-lg font-bold text-gray-900 mb-1">{campaign.title}</h4>
                     <div className="flex items-center space-x-2">
-                      <span className={`px-2 py-0.5 rounded text-xs font-semibold ${
+                      <span className={`px-2 py-0.5 rounded text-xs font-semibold ?{
                         campaign.phase === 'before' ? 'bg-blue-100 text-blue-700' :
                         campaign.phase === 'during' ? 'bg-red-100 text-red-700' :
                         'bg-green-100 text-green-700'
                       }`}>
                         {campaign.phase.toUpperCase()}
                       </span>
-                      <span className={`px-2 py-0.5 rounded text-xs font-semibold ${
+                      <span className={`px-2 py-0.5 rounded text-xs font-semibold ?{
                         campaign.urgency === 'critical' ? 'bg-red-100 text-red-700' :
                         campaign.urgency === 'high' ? 'bg-orange-100 text-orange-700' :
                         'bg-yellow-100 text-yellow-700'
@@ -80,18 +80,18 @@ export default function CampaignsList() {
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-gray-600">Progress</span>
                     <span className="font-semibold text-gray-900">
-                      ${campaign.raisedAmount.toLocaleString()} / ${campaign.targetAmount.toLocaleString()}
+                      ?{campaign.raisedAmount.toLocaleString()} / ?{campaign.targetAmount.toLocaleString()}
                     </span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-3">
                     <div
                       className="bg-gradient-to-r from-red-500 to-red-600 h-3 rounded-full transition-all"
-                      style={{ width: `${Math.min(progress, 100)}%` }}
+                      style={{ width: `?{Math.min(progress, 100)}%` }}
                     />
                   </div>
                   <div className="flex items-center justify-between text-xs text-gray-500">
                     <span>{progress.toFixed(0)}% funded</span>
-                    <span>${(campaign.targetAmount - campaign.raisedAmount).toLocaleString()} to go</span>
+                    <span>?{(campaign.targetAmount - campaign.raisedAmount).toLocaleString()} to go</span>
                   </div>
                 </div>
 
@@ -131,7 +131,7 @@ export default function CampaignsList() {
                       type="number"
                       value={donationAmount}
                       onChange={(e) => setDonationAmount(e.target.value)}
-                      placeholder="Enter amount ($)"
+                      placeholder="Enter amount (?)"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                       min="1"
                     />

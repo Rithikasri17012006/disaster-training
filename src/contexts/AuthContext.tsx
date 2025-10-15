@@ -51,7 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (existingUser) return false;
 
     const newUser: User = {
-      id: `${role.toUpperCase().substring(0, 3)}${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`,
+      id: `?{role.toUpperCase().substring(0, 3)}?{Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`,
       name,
       email,
       phone,

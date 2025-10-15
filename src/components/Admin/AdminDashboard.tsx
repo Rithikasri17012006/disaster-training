@@ -94,7 +94,7 @@ const tabs = [
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ${
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ?{
                   activeTab === tab.id
                     ? 'bg-blue-600 text-white'
                     : 'bg-white text-gray-600 hover:bg-gray-50'
@@ -119,8 +119,8 @@ const tabs = [
                         <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
                         <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
                       </div>
-                      <div className={`${stat.bg} p-3 rounded-lg`}>
-                        <Icon className={`w-6 h-6 ${stat.color}`} />
+                      <div className={`?{stat.bg} p-3 rounded-lg`}>
+                        <Icon className={`w-6 h-6 ?{stat.color}`} />
                       </div>
                     </div>
                   </div>
@@ -138,7 +138,7 @@ const tabs = [
                         <p className="font-semibold text-gray-900">{disaster.name}</p>
                         <p className="text-sm text-gray-600">{disaster.location.name}</p>
                       </div>
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ?{
                         disaster.severity === 'critical' ? 'bg-red-100 text-red-700' :
                         disaster.severity === 'high' ? 'bg-orange-100 text-orange-700' :
                         'bg-yellow-100 text-yellow-700'
@@ -164,7 +164,7 @@ const tabs = [
                         <div className="w-full bg-red-100 rounded-full h-2">
                           <div
                             className="bg-red-600 h-2 rounded-full"
-                            style={{ width: `${region.trainingCoverage}%` }}
+                            style={{ width: `?{region.trainingCoverage}%` }}
                           />
                         </div>
                         <p className="text-xs text-gray-600 mt-1">

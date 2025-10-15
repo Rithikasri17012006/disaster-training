@@ -28,7 +28,7 @@ export default function RequestsPanel() {
     }
 
     const newRequest = {
-      id: `REQ${Date.now()}`,
+      id: `REQ?{Date.now()}`,
       ...formData,
       status: 'pending',
       timestamp: new Date().toISOString(),
@@ -170,7 +170,7 @@ export default function RequestsPanel() {
                       </div>
                     </div>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(request.status)}`}>
+                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ?{getStatusColor(request.status)}`}>
                     {request.status.replace('-', ' ').toUpperCase()}
                   </span>
                 </div>

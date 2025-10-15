@@ -25,7 +25,7 @@ export default function TransparencyLedger() {
           </div>
           <p className="text-sm text-gray-600 mb-1">Total Funds Raised</p>
           <p className="text-3xl font-bold text-gray-900">
-            ${activeCampaigns.reduce((sum, c) => sum + c.raisedAmount, 0).toLocaleString()}
+            ?{activeCampaigns.reduce((sum, c) => sum + c.raisedAmount, 0).toLocaleString()}
           </p>
         </div>
 
@@ -64,7 +64,7 @@ export default function TransparencyLedger() {
                     <h4 className="text-lg font-bold text-gray-900 mb-1">{campaign.title}</h4>
                     <p className="text-sm text-gray-600">{campaign.location}</p>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ?{
                     progress >= 100 ? 'bg-green-100 text-green-700' :
                     progress >= 75 ? 'bg-blue-100 text-blue-700' :
                     'bg-orange-100 text-orange-700'
@@ -77,13 +77,13 @@ export default function TransparencyLedger() {
                   <div className="flex items-center justify-between text-sm mb-2">
                     <span className="text-gray-600">Funding Progress</span>
                     <span className="font-semibold text-gray-900">
-                      ${campaign.raisedAmount.toLocaleString()} / ${campaign.targetAmount.toLocaleString()}
+                      ?{campaign.raisedAmount.toLocaleString()} / ?{campaign.targetAmount.toLocaleString()}
                     </span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-3">
                     <div
                       className="bg-gradient-to-r from-green-500 to-green-600 h-3 rounded-full transition-all"
-                      style={{ width: `${Math.min(progress, 100)}%` }}
+                      style={{ width: `?{Math.min(progress, 100)}%` }}
                     />
                   </div>
                 </div>
@@ -98,7 +98,7 @@ export default function TransparencyLedger() {
                           <p className="text-xs text-gray-500">{new Date(donation.date).toLocaleString()}</p>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <span className="font-semibold text-green-600">${donation.amount.toLocaleString()}</span>
+                          <span className="font-semibold text-green-600">?{donation.amount.toLocaleString()}</span>
                           <button className="p-1 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 transition-colors">
                             <Link className="w-4 h-4" />
                           </button>
@@ -133,7 +133,7 @@ export default function TransparencyLedger() {
                   <tr key={donation.id} className="border-b border-gray-100 hover:bg-gray-50">
                     <td className="py-3 px-4 font-mono text-sm text-gray-700">{donation.transactionHash}</td>
                     <td className="py-3 px-4 text-sm text-gray-700">{campaign?.title}</td>
-                    <td className="py-3 px-4 text-right font-semibold text-green-600">${donation.amount.toLocaleString()}</td>
+                    <td className="py-3 px-4 text-right font-semibold text-green-600">?{donation.amount.toLocaleString()}</td>
                     <td className="py-3 px-4 text-sm text-gray-700">{new Date(donation.date).toLocaleDateString()}</td>
                     <td className="py-3 px-4 text-center">
                       <span className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-semibold">

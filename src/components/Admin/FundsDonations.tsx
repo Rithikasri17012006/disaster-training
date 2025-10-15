@@ -57,7 +57,7 @@ const FundsDonations: React.FC = () => {
 	const stats = [
 		{
 			title: "Total Funds",
-			value: "$120,000",
+			value: "?120,000",
 			icon: <DollarSign className="h-6 w-6 text-green-600" />,
 			iconBg: "bg-green-100",
 		},
@@ -90,7 +90,7 @@ const FundsDonations: React.FC = () => {
 						<CardHeader>
 							<div className="flex justify-between items-center">
 								<p className="text-gray-600 text-sm font-medium">{stat.title}</p>
-								<div className={`p-2 rounded-xl ${stat.iconBg}`}>
+								<div className={`p-2 rounded-xl ?{stat.iconBg}`}>
 									{stat.icon}
 								</div>
 							</div>
@@ -192,7 +192,7 @@ const FundsDonations: React.FC = () => {
 														</p>
 														<button
 															onClick={() => verifyDonation(donation.id)}
-															className={`mt-3 px-3 py-1 rounded-md text-white ${
+															className={`mt-3 px-3 py-1 rounded-md text-white ?{
 																verified[donation.id]
 																	? "bg-green-500"
 																	: "bg-blue-600 hover:bg-blue-700"
