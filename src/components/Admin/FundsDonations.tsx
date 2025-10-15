@@ -57,7 +57,7 @@ const FundsDonations: React.FC = () => {
 	const stats = [
 		{
 			title: "Total Funds",
-			value: "?120,000",
+			value: "120,000",
 			icon: <DollarSign className="h-6 w-6 text-green-600" />,
 			iconBg: "bg-green-100",
 		},
