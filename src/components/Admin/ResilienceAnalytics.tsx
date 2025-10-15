@@ -86,24 +86,32 @@ export default function ResilienceAnalytics() {
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h4 className="text-lg font-bold text-gray-900 mb-4">Regional Resilience Scores</h4>
           <div className="space-y-4">
-            {mockResilienceData.map((region, index) => (
-              <div key={index}>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="font-semibold text-gray-900">{region.location}</span>
-                  <span className="text-sm font-bold text-gray-700">{region.score}/10</span>
+            {mockResilienceData.map((region, index) => {
+              const barColor =
+                region.score >= 7 ? 'bg-green-600'
+                : region.score >= 6 ? 'bg-blue-600'
+                : 'bg-orange-600';
+              return (
+                <div key={index}>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-semibold text-gray-900">{region.location}</span>
+                    <span className="text-sm font-bold text-gray-700">{region.score}/10</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-3 relative">
+                    <div
+                      className={`h-3 rounded-full ${barColor} transition-all`}
+                      style={{ width: `${region.score * 10}%` }}
+                    />
+                    <span
+                      className="absolute right-2 top-0 text-xs font-semibold text-gray-700"
+                      style={{ left: `${region.score * 10}%`, transform: 'translateX(-100%)' }}
+                    >
+                      
+                    </span>
+                  </div>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-3">
-                  <div
-                    className={`h-3 rounded-full ?{
-                      region.score >= 7 ? 'bg-green-600' :
-                      region.score >= 6 ? 'bg-blue-600' :
-                      'bg-orange-600'
-                    }`}
-                    style={{ width: `?{region.score * 10}%` }}
-                  />
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
@@ -112,24 +120,32 @@ export default function ResilienceAnalytics() {
           <div className="space-y-4">
             {mockResilienceData
               .sort((a, b) => b.vulnerabilityIndex - a.vulnerabilityIndex)
-              .map((region, index) => (
-                <div key={index}>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-semibold text-gray-900">{region.location}</span>
-                    <span className="text-sm font-bold text-gray-700">{region.vulnerabilityIndex}/10</span>
+              .map((region, index) => {
+                const vulnBarColor =
+                  region.vulnerabilityIndex >= 8 ? 'bg-red-600'
+                  : region.vulnerabilityIndex >= 7 ? 'bg-orange-600'
+                  : 'bg-yellow-600';
+                return (
+                  <div key={index}>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-semibold text-gray-900">{region.location}</span>
+                      <span className="text-sm font-bold text-gray-700">{region.vulnerabilityIndex}/10</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-3 relative">
+                      <div
+                        className={`h-3 rounded-full ${vulnBarColor} transition-all`}
+                        style={{ width: `${region.vulnerabilityIndex * 10}%` }}
+                      />
+                      <span
+                        className="absolute right-2 top-0 text-xs font-semibold text-gray-700"
+                        style={{ left: `${region.vulnerabilityIndex * 10}%`, transform: 'translateX(-100%)' }}
+                      >
+                        
+                      </span>
+                    </div>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-3">
-                    <div
-                      className={`h-3 rounded-full ?{
-                        region.vulnerabilityIndex >= 8 ? 'bg-red-600' :
-                        region.vulnerabilityIndex >= 7 ? 'bg-orange-600' :
-                        'bg-yellow-600'
-                      }`}
-                      style={{ width: `?{region.vulnerabilityIndex * 10}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
+                );
+              })}
           </div>
         </div>
       </div>

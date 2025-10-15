@@ -1,40 +1,34 @@
 import { mockDisasters, mockTrainings } from '../../data/mockData';
-import { MapPin, AlertTriangle, Users } from 'lucide-react';
+import { AlertTriangle, Users } from 'lucide-react';
 
 export default function GISMap() {
   return (
     <div className="space-y-6">
-      {/* Interactive Mock Map */}
+      {/* Simple Neat Mock Map */}
       <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
         <h3 className="text-lg font-bold text-gray-900 mb-4">Interactive Risk Map</h3>
 
-        {/* Map Container */}
-        <div className="relative bg-gradient-to-br from-blue-100 via-green-50 to-yellow-50 rounded-lg h-96 overflow-hidden border-2 border-gray-200">
-
-          {/* Grid overlay */}
-          <div className="absolute inset-0 pointer-events-none grid grid-cols-10 grid-rows-10">
-            {Array.from({ length: 100 }).map((_, i) => (
-              <div
-                key={i}
-                className="border border-gray-200/50"
-              />
+        <div className="relative bg-blue-50 rounded-lg h-96 overflow-hidden border border-gray-200">
+          {/* Subtle grid lines */}
+          <div className="absolute inset-0 pointer-events-none grid grid-cols-12 grid-rows-8">
+            {Array.from({ length: 96 }).map((_, i) => (
+              <div key={i} className="border border-gray-200/40" />
             ))}
           </div>
 
-         
           {/* Disaster Pins */}
           {mockDisasters.map((disaster, index) => (
             <div
               key={disaster.id}
               className="absolute"
               style={{
-                left: `?{20 + index * 20}%`,
-                top: `?{25 + index * 15}%`,
+                left: `${10 + index * 15}%`,
+                top: `${20 + index * 10}%`,
               }}
             >
               <div className="relative group cursor-pointer">
                 <div
-                  className={`w-12 h-12 rounded-full flex items-center justify-center animate-pulse ?{
+                  className={`w-10 h-10 rounded-full flex items-center justify-center animate-pulse ${
                     disaster.severity === 'critical'
                       ? 'bg-red-500'
                       : disaster.severity === 'high'
@@ -42,13 +36,13 @@ export default function GISMap() {
                       : 'bg-yellow-500'
                   }`}
                 >
-                  <AlertTriangle className="w-6 h-6 text-white" />
+                  <AlertTriangle className="w-5 h-5 text-white" />
                 </div>
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block z-10">
-                  <div className="bg-gray-900 text-white px-3 py-2 rounded-lg text-xs whitespace-nowrap">
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 hidden group-hover:block z-10">
+                  <div className="bg-gray-900 text-white px-2 py-1 rounded text-xs whitespace-nowrap">
                     <p className="font-semibold">{disaster.name}</p>
                     <p>{disaster.location.name}</p>
-                    <p className="text-gray-300">Risk: {disaster.riskScore}/10</p>
+                    <p>Risk: {disaster.riskScore}/10</p>
                   </div>
                 </div>
               </div>
@@ -61,19 +55,19 @@ export default function GISMap() {
               key={training.id}
               className="absolute"
               style={{
-                left: `?{25 + index * 20}%`,
-                top: `?{50 + index * 10}%`,
+                left: `${20 + index * 20}%`,
+                top: `${50 + index * 10}%`,
               }}
             >
               <div className="relative group cursor-pointer">
-                <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
-                  <Users className="w-5 h-5 text-white" />
+                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                  <Users className="w-4 h-4 text-white" />
                 </div>
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block z-10">
-                  <div className="bg-gray-900 text-white px-3 py-2 rounded-lg text-xs whitespace-nowrap">
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 hidden group-hover:block z-10">
+                  <div className="bg-gray-900 text-white px-2 py-1 rounded text-xs whitespace-nowrap">
                     <p className="font-semibold">{training.title}</p>
                     <p>{training.location.name}</p>
-                    <p className="text-gray-300">
+                    <p>
                       {training.enrolled}/{training.capacity} enrolled
                     </p>
                   </div>
@@ -81,11 +75,10 @@ export default function GISMap() {
               </div>
             </div>
           ))}
-
         </div>
       </div>
 
-      {/* Risk Zones and Training Locations */}
+      {/* Risk Zones and Training Locations Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Risk Zones */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
@@ -99,7 +92,7 @@ export default function GISMap() {
                     <p className="text-sm text-gray-600">{disaster.location.name}</p>
                   </div>
                   <span
-                    className={`px-2 py-1 rounded text-xs font-semibold ?{
+                    className={`px-2 py-1 rounded text-xs font-semibold ${
                       disaster.severity === 'critical'
                         ? 'bg-red-100 text-red-700'
                         : disaster.severity === 'high'
@@ -139,7 +132,7 @@ export default function GISMap() {
                     <p className="text-sm text-gray-600">{training.location.name}</p>
                   </div>
                   <span
-                    className={`px-2 py-1 rounded text-xs font-semibold ?{
+                    className={`px-2 py-1 rounded text-xs font-semibold ${
                       training.status === 'ongoing'
                         ? 'bg-green-100 text-green-700'
                         : training.status === 'upcoming'
@@ -160,7 +153,7 @@ export default function GISMap() {
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div
                       className="bg-blue-600 h-2 rounded-full"
-                      style={{ width: `?{(training.enrolled / training.capacity) * 100}%` }}
+                      style={{ width: `${(training.enrolled / training.capacity) * 100}%` }}
                     />
                   </div>
                 </div>

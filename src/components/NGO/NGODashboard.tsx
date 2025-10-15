@@ -1,132 +1,207 @@
 import { useState } from 'react';
-import { Briefcase, CheckSquare, Users, Link } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
-import { mockTasks } from '../../data/mockData';
-import TasksPanel from './TasksPanel';
-import AttendancePanel from './AttendancePanel';
-import TransparencyLedger from './TransparencyLedger';
+import { QrCode, CheckCircle, Users, Calendar } from 'lucide-react';
+import { mockTrainings } from '../../data/mockData';
 
-type TabType = 'tasks' | 'attendance' | 'ledger';
+export default function AttendancePanel() {
+  const [selectedTraining, setSelectedTraining] = useState<string | null>(null);
+  const [attendanceCode, setAttendanceCode] = useState('');
+  const [showQR, setShowQR] = useState(false);
 
-export default function NGODashboard() {
-  const { user, logout } = useAuth();
-  const [activeTab, setActiveTab] = useState<TabType>('tasks');
+  const handleMarkAttendance = () => {
+    const training = mockTrainings.find(t => t.id === selectedTraining);
+    if (!training) return;
 
-  const userTasks = mockTasks.filter(t => t.assignedTo === user?.id);
-  const completedTasks = userTasks.filter(t => t.status === 'completed').length;
-  const inProgressTasks = userTasks.filter(t => t.status === 'in-progress').length;
-  const pendingTasks = userTasks.filter(t => t.status === 'pending').length;
+    if (attendanceCode.toUpperCase() === training.attendanceCode) {
+      alert('Attendance marked successfully!');
+      setSelectedTraining(null);
+      setAttendanceCode('');
+    } else {
+      alert('Invalid attendance code. Please try again.');
+    }
+  };
 
-  const stats = [
-    {
-      label: 'Total Tasks',
-      value: userTasks.length,
-      icon: Briefcase,
-      color: 'text-blue-600',
-      bg: 'bg-blue-50',
-    },
-    {
-      label: 'In Progress',
-      value: inProgressTasks,
-      icon: CheckSquare,
-      color: 'text-orange-600',
-      bg: 'bg-orange-50',
-    },
-    {
-      label: 'Completed',
-      value: completedTasks,
-      icon: CheckSquare,
-      color: 'text-green-600',
-      bg: 'bg-green-50',
-    },
-    {
-      label: 'Pending',
-      value: pendingTasks,
-      icon: Briefcase,
-      color: 'text-gray-600',
-      bg: 'bg-gray-50',
-    },
-  ];
-
-  const tabs = [
-    { id: 'tasks' as TabType, label: 'AI Tasks', icon: Briefcase },
-    { id: 'attendance' as TabType, label: 'Attendance', icon: Users },
-    { id: 'ledger' as TabType, label: 'Transparency', icon: Link },
-  ];
+  const generateOTP = () => {
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    alert(`OTP Generated: ${otp}\nShare this with participants for attendance.`);
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center">
-                <Briefcase className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-gray-900">NGO/Trainer Portal</h1>
-                <p className="text-xs text-gray-500">Disaster Response Management</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-4">
-              <div className="text-right">
-                <p className="text-sm font-medium text-gray-900">{user?.name}</p>
-                <p className="text-xs text-gray-500">{user?.organizationId}</p>
-              </div>
-              <button
-                onClick={logout}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium"
-              >
-                Logout
-              </button>
-            </div>
+    <div className="space-y-6">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl shadow-lg p-6 text-white">
+        <div className="flex items-center space-x-3 mb-2">
+          <Users className="w-6 h-6" />
+          <h3 className="text-xl font-bold">Training Attendance Management</h3>
+        </div>
+        <p className="text-blue-100">
+          Track participant attendance using QR codes or OTP verification for accurate records.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <h3 className="text-lg font-bold text-gray-900 mb-4">Active Trainings</h3>
+          <div className="space-y-3">
+            {mockTrainings
+              .filter(t => t.status === 'upcoming' || t.status === 'ongoing')
+              .map(training => (
+                <div
+                  key={training.id}
+                  className={`border rounded-lg p-4 cursor-pointer transition-all ${
+                    selectedTraining === training.id
+                      ? 'border-blue-500 bg-blue-50'
+                      : 'border-gray-200 hover:border-blue-300'
+                  }`}
+                  onClick={() => setSelectedTraining(training.id)}
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <h4 className="font-semibold text-gray-900">{training.title}</h4>
+                      <p className="text-sm text-gray-600">{training.location.name}</p>
+                    </div>
+                    <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                      training.status === 'ongoing'
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-blue-100 text-blue-700'
+                    }`}>
+                      {training.status.toUpperCase()}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center space-x-2 text-gray-600">
+                      <Calendar className="w-4 h-4" />
+                      <span>{new Date(training.date).toLocaleDateString()}</span>
+                    </div>
+                    <div className="flex items-center space-x-2 text-gray-600">
+                      <Users className="w-4 h-4" />
+                      <span>{training.enrolled}/{training.capacity}</span>
+                    </div>
+                  </div>
+                  <div className="mt-3">
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div
+                        className="bg-blue-600 h-2 rounded-full"
+                        style={{ width: `${(training.enrolled / training.capacity) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
-      </nav>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {stats.map((stat, index) => {
-            const Icon = stat.icon;
-            return (
-              <div key={index} className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
-                    <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
-                  </div>
-                  <div className={`?{stat.bg} p-3 rounded-lg`}>
-                    <Icon className={`w-6 h-6 ?{stat.color}`} />
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          {selectedTraining ? (
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Attendance Tracking</h3>
+                <p className="text-sm text-gray-600">
+                  {mockTrainings.find(t => t.id === selectedTraining)?.title}
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-3">QR Code Attendance</h4>
+                  {showQR ? (
+                    <div className="text-center">
+                      <div className="w-48 h-48 bg-gray-900 rounded-lg mx-auto mb-3 flex items-center justify-center">
+                        <QrCode className="w-32 h-32 text-white" />
+                      </div>
+                      <p className="text-sm text-gray-600 mb-3">
+                        Participants scan this code to mark attendance
+                      </p>
+                      <button
+                        onClick={() => setShowQR(false)}
+                        className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium"
+                      >
+                        Hide QR Code
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setShowQR(true)}
+                      className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                    >
+                      <QrCode className="w-5 h-5" />
+                      <span>Generate QR Code</span>
+                    </button>
+                  )}
+                </div>
+
+                <div className="border-t border-gray-200 pt-4">
+                  <h4 className="font-semibold text-gray-900 mb-3">OTP Verification</h4>
+                  <button
+                    onClick={generateOTP}
+                    className="w-full px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+                  >
+                    Generate OTP
+                  </button>
+                </div>
+
+                <div className="border-t border-gray-200 pt-4">
+                  <h4 className="font-semibold text-gray-900 mb-3">Manual Code Entry</h4>
+                  <div className="space-y-3">
+                    <input
+                      type="text"
+                      value={attendanceCode}
+                      onChange={(e) => setAttendanceCode(e.target.value)}
+                      placeholder="Enter attendance code"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                    <button
+                      onClick={handleMarkAttendance}
+                      className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                    >
+                      <CheckCircle className="w-4 h-4" />
+                      <span>Mark Attendance</span>
+                    </button>
                   </div>
                 </div>
               </div>
-            );
-          })}
-        </div>
 
-        <div className="flex space-x-2 mb-6 overflow-x-auto pb-2">
-          {tabs.map(tab => {
-            const Icon = tab.icon;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ?{
-                  activeTab === tab.id
-                    ? 'bg-green-600 text-white'
-                    : 'bg-white text-gray-600 hover:bg-gray-50'
-                }`}
-              >
-                <Icon className="w-4 h-4" />
-                <span>{tab.label}</span>
-              </button>
-            );
-          })}
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <p className="text-sm text-gray-700">
+                  <span className="font-semibold">Hint:</span> The attendance code for this training is{' '}
+                  <span className="font-mono font-bold">
+                    {mockTrainings.find(t => t.id === selectedTraining)?.attendanceCode}
+                  </span>
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <Users className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Select a Training</h3>
+              <p className="text-gray-600">Choose a training from the list to manage attendance</p>
+            </div>
+          )}
         </div>
+      </div>
 
-        {activeTab === 'tasks' && <TasksPanel tasks={userTasks} />}
-        {activeTab === 'attendance' && <AttendancePanel />}
-        {activeTab === 'ledger' && <TransparencyLedger />}
+      <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        <h3 className="text-lg font-bold text-gray-900 mb-4">Attendance Summary</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {mockTrainings
+            .filter(t => t.status === 'completed')
+            .map(training => (
+              <div key={training.id} className="border border-gray-200 rounded-lg p-4">
+                <h4 className="font-semibold text-gray-900 mb-2">{training.title}</h4>
+                <p className="text-sm text-gray-600 mb-3">{new Date(training.date).toLocaleDateString()}</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-600">Attendance</span>
+                  <span className="text-lg font-bold text-green-600">
+                    {training.enrolled}/{training.capacity}
+                  </span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+                  <div
+                    className="bg-green-600 h-2 rounded-full"
+                    style={{ width: `${(training.enrolled / training.capacity) * 100}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );

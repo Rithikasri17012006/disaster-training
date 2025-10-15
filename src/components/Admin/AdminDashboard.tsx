@@ -90,14 +90,23 @@ const tabs = [
         <div className="flex space-x-2 mb-6 overflow-x-auto pb-2">
           {tabs.map(tab => {
             const Icon = tab.icon;
+            // Define a color for each tab when active
+            const activeColors: Record<TabType, string> = {
+              overview: "bg-blue-600 text-white",
+              map: "bg-green-600 text-white",
+              alerts: "bg-red-600 text-white",
+              approvals: "bg-yellow-500 text-white",
+              analytics: "bg-purple-600 text-white",
+              funds: "bg-indigo-600 text-white",
+            };
             return (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ?{
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ${
                   activeTab === tab.id
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white text-gray-600 hover:bg-gray-50'
+                    ? activeColors[tab.id]
+                    : "bg-white text-gray-600 hover:bg-gray-50"
                 }`}
               >
                 <Icon className="w-4 h-4" />

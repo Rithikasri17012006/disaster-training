@@ -38,7 +38,7 @@ export const mockDisasters: Disaster[] = [
     name: 'Hurricane zone A',
     type: 'Hurricane',
     severity: 'critical',
-    location: { lat: 28.5383, lng: -81.3792, name: 'banglore, FL' },
+    location: { lat: 28.5383, lng: -81.3792, name: 'Orlando, FL' },
     status: 'predicted',
     startDate: '2025-10-20',
     affectedPopulation: 250000,
@@ -49,7 +49,7 @@ export const mockDisasters: Disaster[] = [
     name: 'Wildfire Zone B',
     type: 'Wildfire',
     severity: 'high',
-    location: { lat: 34.0522, lng: -118.2437, name: 'thimbam, CA' },
+    location: { lat: 34.0522, lng: -118.2437, name: 'Los Angeles, CA' },
     status: 'active',
     startDate: '2025-10-10',
     affectedPopulation: 150000,
@@ -60,7 +60,7 @@ export const mockDisasters: Disaster[] = [
     name: 'Flood Recovery',
     type: 'Flood',
     severity: 'medium',
-    location: { lat: 29.7604, lng: -95.3698, name: 'chennai, TX' },
+    location: { lat: 29.7604, lng: -95.3698, name: 'Houston, TX' },
     status: 'recovery',
     startDate: '2025-09-15',
     affectedPopulation: 100000,
@@ -114,29 +114,15 @@ export const mockTrainings: Training[] = [
 ];
 
 export const mockCampaigns: Campaign[] = [
-  {
-    id: 'CMP001',
-    title: 'Hurricane preparedness train Fund',
-    description: 'Stocking emergency supplies (food, water, medical kits)',
-    phase: 'before',
-    targetAmount: 100000,
-    raisedAmount: 65000,
-    location: 'Banglore, FL',
-    startDate: '2025-10-15',
-    endDate: '2025-10-30',
-    status: 'active',
-    approved: true,
-    category: 'Emergency Supplies',
-    urgency: 'medium',
-  },
+  
   {
     id: 'CMP002',
-    title: 'Wildfire Recovery Supplies',
+    title: 'Wildfire preparing & training',
     description: 'Essential supplies for wildfire survivors',
     phase: 'during',
     targetAmount: 75000,
     raisedAmount: 52000,
-    location: 'thimbam, CA',
+    location: 'Los Angeles, CA',
     startDate: '2025-10-10',
     endDate: '2025-10-25',
     status: 'active',
@@ -151,7 +137,7 @@ export const mockCampaigns: Campaign[] = [
     phase: 'after',
     targetAmount: 150000,
     raisedAmount: 89000,
-    location: 'himachal pradhesh, TX',
+    location: 'Houston, TX',
     startDate: '2025-09-20',
     endDate: '2025-11-20',
     status: 'active',
@@ -179,11 +165,11 @@ export const mockCampaigns: Campaign[] = [
 export const mockDonations: Donation[] = [
   {
     id: 'DON001',
-    campaignId: 'CMP001',
+    campaignId: 'CMP003',
     donorId: 'DNR001',
     amount: 500,
     date: '2025-10-15',
-    transactionHash: '0x1a2b3c4d5e6f7g9i0j',
+    transactionHash: '0x1a2b3c4d5e6f7g8h9i0j',
     impactProof: {
       photos: ['https://images.pexels.com/photos/6646917/pexels-photo-6646917.jpeg'],
       description: 'Provided emergency supplies to 25 families',
@@ -215,7 +201,7 @@ export const mockTasks: Task[] = [
     priority: 'critical',
     status: 'in-progress',
     dueDate: '2025-10-18',
-    location: 'Banglore, FL',
+    location: 'Orlando, FL',
     aiGenerated: true,
   },
   {
@@ -239,7 +225,7 @@ export const mockTasks: Task[] = [
     priority: 'critical',
     status: 'pending',
     dueDate: '2025-10-20',
-    location: 'Banglore, FL',
+    location: 'Orlando, FL',
     aiGenerated: true,
   },
   {
@@ -251,7 +237,7 @@ export const mockTasks: Task[] = [
     priority: 'high',
     status: 'completed',
     dueDate: '2025-10-15',
-    location: 'thimbam, CA',
+    location: 'Los Angeles, CA',
     aiGenerated: false,
   },
 ];
@@ -263,7 +249,7 @@ export const mockAlerts: Alert[] = [
     message: 'Category 4 hurricane expected to make landfall in 5 days. Evacuate coastal areas.',
     type: 'danger',
     severity: 'critical',
-    location: 'Banglore, FL',
+    location: 'Orlando, FL',
     timestamp: '2025-10-15T08:00:00Z',
     aiPredicted: true,
   },
@@ -273,7 +259,7 @@ export const mockAlerts: Alert[] = [
     message: 'Fire spreading rapidly due to high winds. Residents in Zone B should prepare for evacuation.',
     type: 'warning',
     severity: 'high',
-    location: 'ooty, CA',
+    location: 'Los Angeles, CA',
     timestamp: '2025-10-15T14:30:00Z',
     aiPredicted: true,
   },
@@ -283,7 +269,7 @@ export const mockAlerts: Alert[] = [
     message: 'New hurricane preparedness workshop scheduled for October 18th. Limited spots available.',
     type: 'info',
     severity: 'low',
-    location: 'Baglore, FL',
+    location: 'Orlando, FL',
     timestamp: '2025-10-15T10:00:00Z',
     aiPredicted: false,
   },
@@ -326,7 +312,7 @@ export const mockRequests: Request[] = [
 
 export const mockResilienceData: ResilienceData[] = [
   {
-    location: 'Banglore, FL',
+    location: 'Orlando, FL',
     score: 6.5,
     trainingCoverage: 45,
     readinessScore: 65,
@@ -335,7 +321,7 @@ export const mockResilienceData: ResilienceData[] = [
     trainedPopulation: 135000,
   },
   {
-    location: 'Ooty, CA',
+    location: 'Los Angeles, CA',
     score: 7.2,
     trainingCoverage: 58,
     readinessScore: 72,
@@ -344,7 +330,7 @@ export const mockResilienceData: ResilienceData[] = [
     trainedPopulation: 2320000,
   },
   {
-    location: 'Thimbam, TX',
+    location: 'Houston, TX',
     score: 6.8,
     trainingCoverage: 52,
     readinessScore: 68,

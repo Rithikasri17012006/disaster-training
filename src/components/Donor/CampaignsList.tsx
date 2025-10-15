@@ -80,7 +80,7 @@ export default function CampaignsList() {
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-gray-600">Progress</span>
                     <span className="font-semibold text-gray-900">
-                      ?{campaign.raisedAmount.toLocaleString()} / ?{campaign.targetAmount.toLocaleString()}
+                      {campaign.raisedAmount.toLocaleString()} / {campaign.targetAmount.toLocaleString()}
                     </span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-3">
@@ -91,7 +91,7 @@ export default function CampaignsList() {
                   </div>
                   <div className="flex items-center justify-between text-xs text-gray-500">
                     <span>{progress.toFixed(0)}% funded</span>
-                    <span>?{(campaign.targetAmount - campaign.raisedAmount).toLocaleString()} to go</span>
+                    <span>{(campaign.targetAmount - campaign.raisedAmount).toLocaleString()} to go</span>
                   </div>
                 </div>
 
